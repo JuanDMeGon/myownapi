@@ -81,9 +81,36 @@ class MakerVehiclesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(CreateVehicleRequest $request, $makerId, $vehicleId)
 	{
-		//
+		$maker = Maker::find($makerId);
+
+		if(!$maker)
+		{
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
+		}
+
+		$vehicle = $maker->vehicles->find($vehicleId);
+
+		if(!$vehicle)
+		{
+			return response()->json(['message' => 'This vehicle does not exist', 'code' => 404], 404);
+		}
+
+
+		$color = $request->get('color');
+		$power = $request->get('power');
+		$capacity = $request->get('capacity');
+		$speed = $request->get('speed');
+
+		$vehicle->color = $color;
+		$vehicle->power = $power;
+		$vehicle->capacity = $capacity;	
+		$vehicle->speed = $speed;
+
+		$vehicle->save();
+
+		return response()->json(['message' => 'The vehicle has been updated'], 200);
 	}
 
 	/**
