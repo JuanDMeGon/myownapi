@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use App\Maker;
 use App\Vehicle;
@@ -24,7 +25,10 @@ class MakerController extends Controller {
 	 */
 	public function index()
 	{
-		$makers = Maker::all();
+		$makers = Cache::remember('makers', 15/60, function()
+			{
+				return Maker::all();
+			});
 
 		return response()->json(['data' => $makers], 200);
 	}
