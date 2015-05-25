@@ -19,7 +19,7 @@ class VehiclesSeed extends Seeder
 	{
 		$faker = Faker::create();
 
-		for($i = 0; $i < 30; $i++)
+		for($i = 0; $i < 500; $i++)
 		{
 			Vehicle::create
 			([

@@ -19,7 +19,7 @@ class MakerSeed extends Seeder
 	{
 		$faker = Faker::create();
 
-		for($i = 0; $i < 6; $i++)
+		for($i = 0; $i < 100; $i++)
 		{
 			Maker::create
 			([

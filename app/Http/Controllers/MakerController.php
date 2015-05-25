@@ -27,10 +27,10 @@ class MakerController extends Controller {
 	{
 		$makers = Cache::remember('makers', 15/60, function()
 			{
-				return Maker::all();
+				return Maker::simplePaginate(15);
 			});
 
-		return response()->json(['data' => $makers], 200);
+		return response()->json(['next' => $makers->nextPageUrl(), 'previous' => $makers->previousPageUrl(), 'data' => $makers->items()], 200);
 	}
 
 	/**
