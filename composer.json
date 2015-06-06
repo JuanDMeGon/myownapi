@@ -10,7 +10,8 @@
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
-		"fzaninotto/faker": "~1.4"
+		"fzaninotto/faker": "~1.4",
+		"lucadegasperi/oauth2-server-laravel": "4.0.x@dev"
 	},
 	"autoload": {
 		"classmap": [

@@ -2,6 +2,7 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use League\OAuth2\Server\Exception\InvalidRequestException;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -41,6 +42,10 @@ class Handler extends ExceptionHandler {
 		if($e instanceof NotFoundHttpException)
 		{
 			return response()->json(['message' => 'Bad request, please verify your request route', 'code' => 400], 400);
+		}
+		elseif($e instanceof InvalidRequestException)
+		{
+			return 
 		}
 		else
 		{
