@@ -43,10 +43,6 @@ class Handler extends ExceptionHandler {
 		{
 			return response()->json(['message' => 'Bad request, please verify your request route', 'code' => 400], 400);
 		}
-		elseif($e instanceof InvalidRequestException)
-		{
-			return 
-		}
 		else
 		{
 			return response()->json(['message' => 'Unexpected error, try again later', 'code' => 500], 500);

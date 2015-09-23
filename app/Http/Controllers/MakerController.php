@@ -42,9 +42,9 @@ class MakerController extends Controller {
 	{
 		$values = $request->only(['name', 'phone']);
 
-		Maker::create($values);
+		$maker = Maker::create($values);
 
-		return response()->json(['message' => 'Maker correctly added'], 201);
+		return response()->json(['message' => "Maker correctly added with id: {$maker->id}"], 201);
 	}
 
 	/**

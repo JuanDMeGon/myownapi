@@ -10,7 +10,7 @@ class Vehicle extends Model
 
 	protected $fillable = ['color', 'power', 'capacity', 'speed', 'maker_id'];
 
-	protected $hidden = ['serie', 'created_at', 'updated_at', 'maker_id'];
+	protected $hidden = ['created_at', 'updated_at', 'maker_id'];
 
 	public function maker()
 	{
