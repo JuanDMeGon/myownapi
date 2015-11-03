@@ -15,7 +15,7 @@ class MakerController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('oauth', ['except' => ['index', 'show']]);
+		$this->middleware('auth.basis.once', ['except' => ['index', 'show']]);
 	}
 
 	/**

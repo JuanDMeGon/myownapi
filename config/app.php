@@ -194,7 +194,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-		'Authorizer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade',
+		'Authorizer'=> 'LucaDegasperi\OAuth2Server\Facades\Authorizer'
 
 	],
 

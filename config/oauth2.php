@@ -1,21 +1,15 @@
 <?php
 
-use App\User;
+/*
+ * This file is part of OAuth 2.0 Laravel.
+ *
+ * (c) Luca Degasperi <packages@lucadegasperi.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Database Connection to use
-    |--------------------------------------------------------------------------
-    |
-    | Set the default database connection to use for the repositories, when
-    | set to default, it uses whatever connection you specified in your
-    | laravel database config.
-    |
-    */
-
-    'database' => 'default',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,22 +28,7 @@ return [
     */
 
     'grant_types' => [
-        'password' => [
-            'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
-            'callback' => function($username, $password)
-            {
-                if( Auth::validate(['email' => $username, 'password' => $password]))
-                {
-                      $user = User::where('email',$username)->first();
-                      return $user->id;
-                } 
-                else
-                {
-                    return false;
-                }
-            },
-            'access_token_ttl' => 3600
-        ]
+
     ],
 
     /*
