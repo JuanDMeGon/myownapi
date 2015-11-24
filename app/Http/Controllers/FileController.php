@@ -8,6 +8,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateFileRequest;
 
+use Carbon\Carbon;
+
+use App\File;
+
 class FileController extends Controller
 {
     /**
@@ -17,7 +21,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        return 'index';
+        
     }
 
     /**
@@ -28,7 +32,24 @@ class FileController extends Controller
      */
     public function store(CreateFileRequest $request)
     {
-        return 'epa';
+        $title = $request->get('title');
+        $description = $request->get('description');
+
+        $file = $request->file('file');
+
+        $path = '/files/';
+        $name = sha1(Carbon::now()).'.'.$file->guessExtension();
+
+        $file->move(public_path().$path, $name);
+
+        $instance = File::create(
+            [
+                'title' => $title,
+                'description' => $description,
+                'path' => $path.$name
+            ]);
+
+        return response()->json(['data' => "The file {$instance->name} was created with id {$instance->id}"],200);
     }
 
     /**
