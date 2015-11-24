@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateFileRequest;
+use App\Http\Requests\UpdateFileRequest;
 
 use Carbon\Carbon;
 
 use App\File;
+
+use File as FileManager;
 
 class FileController extends Controller
 {
@@ -35,18 +38,13 @@ class FileController extends Controller
         $title = $request->get('title');
         $description = $request->get('description');
 
-        $file = $request->file('file');
-
-        $path = '/files/';
-        $name = sha1(Carbon::now()).'.'.$file->guessExtension();
-
-        $file->move(public_path().$path, $name);
+        $path = $this->storeFile($request);
 
         $instance = File::create(
             [
                 'title' => $title,
                 'description' => $description,
-                'path' => $path.$name
+                'path' => $path
             ]);
 
         return response()->json(['data' => "The file {$instance->name} was created with id {$instance->id}"],200);
@@ -70,9 +68,29 @@ class FileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateFileRequest $request, $id)
     {
-        //
+        $file = File::find($id);
+
+        if($file)
+        {
+            $file->title = $request->get('title');
+            $file->description = $request->get('description');
+
+            if($request->hasFile('file'))
+            {
+                FileManager::delete(public_path().$file->path);
+
+                $path = $this->storeFile($request);
+                $file->path = $path;
+            }
+
+            $file->save();
+
+            return response()->json(['data' => "The file {$file->id} was updated"],200);
+        }
+
+        return response()->json(['message' => 'Does not exists a file with that id'], 404);
     }
 
     /**
@@ -84,5 +102,17 @@ class FileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function storeFile($request)
+    {
+        $file = $request->file('file');
+
+        $path = '/files/';
+        $name = sha1(Carbon::now()).'.'.$file->guessExtension();
+
+        $file->move(public_path().$path, $name);
+
+        return $path.$name;
     }
 }
