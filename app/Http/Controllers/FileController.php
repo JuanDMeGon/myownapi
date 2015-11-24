@@ -24,7 +24,9 @@ class FileController extends Controller
      */
     public function index()
     {
-        
+        $files = File::all();
+
+        return response()->json(['data' => $files],200);
     }
 
     /**
@@ -58,7 +60,14 @@ class FileController extends Controller
      */
     public function show($id)
     {
-        //
+        $file = File::find($id);
+
+        if($file)
+        {
+            return response()->json(['data' => $file], 200);
+        }
+
+        return response()->json(['message' => 'Does not exists a file with that id'], 404);
     }
 
     /**
@@ -101,7 +110,18 @@ class FileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $file = File::find($id);
+
+        if($file)
+        {
+            FileManager::delete(public_path().$file->path);
+
+            $file->delete();
+
+            return response()->json(['data' => "The file with id {$file->id} was removed"],200);
+        }
+
+        return response()->json(['message' => 'Does not exists a file with that id'], 404);
     }
 
     function storeFile($request)
