@@ -32,7 +32,7 @@ class CreateOauthClientEndpointsTable extends Migration
             $table->string('client_id', 40);
             $table->string('redirect_uri');
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->unique(['client_id', 'redirect_uri']);
 

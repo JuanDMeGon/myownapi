@@ -29,7 +29,7 @@ class CreateOauthGrantsTable extends Migration
     {
         Schema::create('oauth_grants', function (Blueprint $table) {
             $table->string('id', 40)->primary();
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

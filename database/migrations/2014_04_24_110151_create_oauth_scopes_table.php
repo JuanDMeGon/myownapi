@@ -31,7 +31,7 @@ class CreateOauthScopesTable extends Migration
             $table->string('id', 40)->primary();
             $table->string('description');
 
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

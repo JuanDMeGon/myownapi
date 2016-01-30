@@ -32,7 +32,7 @@ class CreateOauthAccessTokenScopesTable extends Migration
             $table->string('access_token_id', 40);
             $table->string('scope_id', 40);
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index('access_token_id');
             $table->index('scope_id');

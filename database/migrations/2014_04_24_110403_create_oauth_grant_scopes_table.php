@@ -32,7 +32,7 @@ class CreateOauthGrantScopesTable extends Migration
             $table->string('grant_id', 40);
             $table->string('scope_id', 40);
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index('grant_id');
             $table->index('scope_id');

@@ -21,7 +21,7 @@ class VehiclesTable extends Migration {
 			$table->float('speed');
 			$table->integer('maker_id')->unsigned();
 			$table->foreign('maker_id')->references('id')->on('makers');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

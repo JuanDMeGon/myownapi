@@ -32,7 +32,7 @@ class CreateOauthAuthCodeScopesTable extends Migration
             $table->string('auth_code_id', 40);
             $table->string('scope_id', 40);
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index('auth_code_id');
             $table->index('scope_id');

@@ -33,7 +33,7 @@ class CreateOauthAuthCodesTable extends Migration
             $table->string('redirect_uri');
             $table->integer('expire_time');
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index('session_id');
 

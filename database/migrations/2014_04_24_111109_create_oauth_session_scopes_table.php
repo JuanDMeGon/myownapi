@@ -32,7 +32,7 @@ class CreateOauthSessionScopesTable extends Migration
             $table->integer('session_id')->unsigned();
             $table->string('scope_id', 40);
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index('session_id');
             $table->index('scope_id');

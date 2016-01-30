@@ -32,7 +32,7 @@ class CreateOauthClientScopesTable extends Migration
             $table->string('client_id', 40);
             $table->string('scope_id', 40);
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index('client_id');
             $table->index('scope_id');

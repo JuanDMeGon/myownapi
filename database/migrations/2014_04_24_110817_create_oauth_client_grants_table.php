@@ -31,7 +31,7 @@ class CreateOauthClientGrantsTable extends Migration
             $table->increments('id');
             $table->string('client_id', 40);
             $table->string('grant_id', 40);
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index('client_id');
             $table->index('grant_id');

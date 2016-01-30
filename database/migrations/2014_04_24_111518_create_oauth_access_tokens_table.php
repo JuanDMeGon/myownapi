@@ -32,7 +32,7 @@ class CreateOauthAccessTokensTable extends Migration
             $table->integer('session_id')->unsigned();
             $table->integer('expire_time');
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->unique(['id', 'session_id']);
             $table->index('session_id');

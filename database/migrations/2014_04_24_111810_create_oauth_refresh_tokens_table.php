@@ -32,7 +32,7 @@ class CreateOauthRefreshTokensTable extends Migration
             $table->string('access_token_id', 40)->primary();
             $table->integer('expire_time');
 
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->foreign('access_token_id')
                   ->references('id')->on('oauth_access_tokens')
