@@ -50,29 +50,12 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		
-		if($e instanceof OAuthException)
-		{
-			$data = [
-                'error' => $e->errorType,
-                'error_description' => $e->getMessage(),
-            ];
-			return response()->json($data, $e->httpStatusCode, $e->getHttpHeaders());
-		}
-
-		if($e instanceof HttpResponseException)
-		{
-			return $e->getResponse();
-		}
-
 		if($e instanceof NotFoundHttpException)
 		{
 			return response()->json(['message' => 'Bad request, please verify your request route', 'code' => 400], 400);
-		}
-		else
-		{
-			return response()->json(['message' => 'Unexpected error, try again later', 'code' => 500], 500);
-		}
+		}		
+
+		return parent::render($request, $e);
 	}
 
 }
